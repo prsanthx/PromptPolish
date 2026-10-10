@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PromptPolish on a ChatGPT-style composer</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #212121;
+      color: #ececec;
+      font: 16px/1.45 ui-sans-serif, "Segoe UI", sans-serif;
+    }
+    main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px 16px 28px;
+    }
+    .thread {
+      width: min(720px, 100%);
+      margin: 0 auto 18px;
+      color: #b4b4b4;
+    }
+    .composer {
+      width: min(720px, 100%);
+      margin: 0 auto;
+      padding: 12px 14px 12px 16px;
+      border-radius: 26px;
+      background: #303030;
+      border: 1px solid #424242;
+    }
+    #prompt-textarea {
+      min-height: 72px;
+      max-height: 200px;
+      overflow: auto;
+      outline: none;
+      white-space: pre-wrap;
+    }
+    #prompt-textarea:empty::before {
+      content: "Ask ChatGPT";
+      color: #8e8e8e;
+    }
+    .note {
+      width: min(720px, 100%);
+      margin: 10px auto 0;
+      color: #8e8e8e;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="thread">ChatGPT-style composer. The animated mark sits on the field. Rewrite stays in the card until you insert it.</p>
+    <div class="composer">
+      <div id="prompt-textarea" contenteditable="true" role="textbox" aria-label="Message ChatGPT" data-testid="prompt-textarea"></div>
+    </div>
+    <p class="note">Click the floating mark, pick a level, rewrite, then insert only if you want the field replaced.</p>
+  </main>
+  <script type="module" src="demo.js"></script>
+</body>
+</html>

@@ -37,6 +37,16 @@ No build step. Reload the extension from that page after you change a file.
 
 The page does not change until you confirm. If the site drops the text, the popup says so and Copy still works.
 
+## On the ChatGPT composer
+
+On `chatgpt.com` and `chat.openai.com`, an animated mark floats on the prompt field. You do not have to open the toolbar popup.
+
+1. Click the mark. It pops, and a card asks for a level: Quick Fix, Detailed, or Expert.
+2. Click **Rewrite**. The improved prompt appears in the card. The field stays as you wrote it.
+3. Click **Insert into field** if you want that text. **Keep original** leaves the draft alone.
+
+Switching level after a rewrite runs that level and shows a new preview. The field still changes only when you insert.
+
 What it will read:
 
 - The focused field, when it is a `textarea`, a prompt-like text input, or a `contenteditable` region.
@@ -46,10 +56,11 @@ On any other site it does not scan the page for a random box. A focused field th
 
 ## Privacy and permissions
 
-The manifest asks for `activeTab` and `scripting` only.
+The manifest asks for `activeTab` and `scripting`. A content script is registered only for `chatgpt.com` and `chat.openai.com`, so the mark can sit on that composer.
 
 - `activeTab` applies to the tab you are looking at, after you click the icon, and it does not last past that tab.
-- `scripting` is how the popup reads and writes that tab. There is no content script on every site, and no host permission.
+- `scripting` is how the popup reads and writes that tab.
+- The content script does not run on other sites. Claude, Gemini, and a focused field still go through the popup.
 - Prompts are not stored. The last level is not remembered. `storage` is not used.
 - There is no remote code, no API key, and no analytics endpoint.
 
@@ -86,7 +97,7 @@ How a check is decided, including the character budgets, is written in [docs/eva
 
 - An external model, including bring-your-own API key
 - Remembering the level you picked
-- An in-page review card
+- The floating composer mark on sites other than ChatGPT
 - Composers other than ChatGPT, Claude, and Gemini
 - Prompt history
 
