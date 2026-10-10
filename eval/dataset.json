@@ -1,0 +1,191 @@
+[
+  {
+    "id": "code-reverse",
+    "task": "coding",
+    "input": "write a python function that reverses a string",
+    "mustInclude": ["python", "function", "reverses", "string"],
+    "mustNotInclude": ["JavaScript", "TypeScript", "Rust", "recursion", "React"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "code-clear",
+    "task": "coding",
+    "input": "Write a Python function that reverses a string.",
+    "mustInclude": ["Python", "function", "reverses", "string"],
+    "mustNotInclude": ["JavaScript", "recursion", "React", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "code-faster",
+    "task": "coding",
+    "input": "make this function faster",
+    "mustInclude": ["function", "faster"],
+    "mustNotInclude": ["Python", "JavaScript", "TypeScript", "memoization", "cache", "O(n)", "Rust"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "code-second-largest",
+    "task": "coding",
+    "input": "write a python function that returns the second largest number in a list. don't use sort.",
+    "mustInclude": ["python", "second", "largest", "sort"],
+    "mustNotInclude": ["quicksort", "mergesort", "heap", "JavaScript", "TypeScript"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "debug-empty-list",
+    "task": "debugging",
+    "input": "pls fix my py code it dont work when list empty",
+    "mustInclude": ["Python", "empty"],
+    "mustNotInclude": ["JavaScript", "React", "TypeScript", "Stack Overflow", "budget"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "debug-typeerror",
+    "task": "debugging",
+    "input": "TypeError: cannot read property map of undefined in my react page",
+    "mustInclude": ["TypeError", "react", "map", "undefined"],
+    "mustNotInclude": ["Vue", "Angular", "useEffect", "budget"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "debug-vague",
+    "task": "debugging",
+    "input": "it crashes sometimes",
+    "mustInclude": ["crashes"],
+    "mustNotInclude": ["Python", "JavaScript", "NullPointer", "segfault", "React", "budget"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "debug-fence",
+    "task": "debugging",
+    "input": "my function crashes\n\n```\ndef f(xs):\n    return xs[0]\n```\n\nTypeError when xs is empty",
+    "mustInclude": ["return xs[0]", "TypeError", "empty"],
+    "mustNotInclude": ["JavaScript", "memoization", "React", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "research-sleep",
+    "task": "research",
+    "input": "research the effects of sleep on memory",
+    "mustInclude": ["sleep", "memory"],
+    "mustNotInclude": ["budget", "students", "PubMed", "React"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "research-laptop",
+    "task": "research",
+    "input": "research the best laptop",
+    "mustInclude": ["laptop"],
+    "mustNotInclude": ["budget", "MacBook", "Dell", "Lenovo", "students", "$"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "research-compare",
+    "task": "research",
+    "input": "compare react and vue for a class assignment, with sources",
+    "mustInclude": ["react", "vue", "sources"],
+    "mustNotInclude": ["Angular", "Svelte", "budget", "TypeScript"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "write-email",
+    "task": "writing",
+    "input": "draft a formal email to my professor about a late assignment",
+    "mustInclude": ["formal", "professor", "assignment"],
+    "mustNotInclude": ["scholarship", "grade", "budget", "React"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "write-vague",
+    "task": "writing",
+    "input": "write something nice",
+    "mustInclude": ["something", "nice"],
+    "mustNotInclude": ["birthday", "marketing", "customer", "resume", "budget"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "learn-closures",
+    "task": "learning",
+    "input": "explain closures in javascript like I'm new",
+    "mustInclude": ["closures", "javascript"],
+    "mustNotInclude": ["TypeScript", "Rust", "React", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "learn-rust",
+    "task": "learning",
+    "input": "teach me rust but don't use the borrow checker word",
+    "mustInclude": ["rust", "borrow"],
+    "mustNotInclude": ["ownership", "lifetime", "Python", "Cargo", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": true, "expert": true }
+  },
+  {
+    "id": "learn-quicksort",
+    "task": "learning",
+    "input": "explain quicksort. i already know bubble sort. don't use metaphors.",
+    "mustInclude": ["quicksort", "bubble", "metaphors"],
+    "mustNotInclude": ["mergesort", "heap", "Python", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": true, "expert": true }
+  },
+  {
+    "id": "build-todo",
+    "task": "building",
+    "input": "build a small todo app from scratch",
+    "mustInclude": ["todo", "app"],
+    "mustNotInclude": ["React", "Vue", "Angular", "JavaScript", "Python", "budget"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "build-vague",
+    "task": "building",
+    "input": "build me an app",
+    "mustInclude": ["app"],
+    "mustNotInclude": ["React", "iOS", "Android", "budget", "startup", "JavaScript"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "intent-widget-api",
+    "task": "general",
+    "input": "Call the \"WidgetAPI\" with limit 200. Don't add retries.",
+    "mustInclude": ["WidgetAPI", "200", "retries"],
+    "mustNotInclude": ["axios", "Python", "React", "timeout", "budget"],
+    "openQuestion": { "quick": false, "detailed": false, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "general-thoughts",
+    "task": "general",
+    "input": "need thoughts on this",
+    "mustInclude": ["thoughts"],
+    "mustNotInclude": ["React", "budget", "startup", "Python"],
+    "openQuestion": { "quick": false, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  },
+  {
+    "id": "non-request",
+    "task": "general",
+    "input": "help",
+    "mustInclude": ["Help"],
+    "mustNotInclude": ["React", "Python", "budget", "email"],
+    "openQuestion": { "quick": true, "detailed": true, "expert": true },
+    "assumption": { "quick": false, "detailed": false, "expert": false }
+  }
+]
