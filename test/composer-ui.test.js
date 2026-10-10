@@ -70,6 +70,15 @@ test('an unknown level is ignored and insert clears the card', () => {
   assert.deepEqual(reduceAssist(ready, { type: 'inserted' }, enhance), INITIAL_ASSIST);
 });
 
+test('the ChatGPT content bundle is a classic script', () => {
+  const bundle = readFileSync(new URL('../extension/composer/content.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(bundle, /^\s*import\s/m);
+  assert.match(bundle, /Polish this prompt/);
+  assert.match(bundle, /Insert into field/);
+  assert.match(bundle, /mobile-composer-prompt/);
+  assert.match(bundle, /@keyframes pp-float/);
+});
+
 test('the content script is the ChatGPT entry and the card offers insert', () => {
   const entry = readFileSync(new URL('../extension/src/composer-button.js', import.meta.url), 'utf8');
   const ui = readFileSync(new URL('../extension/src/composer-ui.js', import.meta.url), 'utf8');

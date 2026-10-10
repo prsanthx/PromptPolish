@@ -32,8 +32,7 @@ test('manifest is MV3 and the content script is ChatGPT only', () => {
   assert.deepEqual(manifest.content_scripts, [
     {
       matches: ['https://chatgpt.com/*', 'https://chat.openai.com/*'],
-      js: ['src/composer-button.js'],
-      type: 'module',
+      js: ['composer/content.js'],
       run_at: 'document_idle',
     },
   ]);

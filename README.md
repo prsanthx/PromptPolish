@@ -14,7 +14,7 @@ Built for developers and students who want a clearer prompt without a tool that 
 4. Choose **Load unpacked** and select the `extension` folder (the folder that contains `manifest.json`).
 5. Pin PromptPolish if you want it on the toolbar.
 
-No build step. Reload the extension from that page after you change a file.
+Reload the extension from that page after you change a file. The ChatGPT button is the bundled file `extension/composer/content.js`. After changing that button, run `npm run bundle` and reload.
 
 ## Use the popup
 

@@ -120,7 +120,7 @@ export function mountComposerAssist(doc, options) {
       host.hidden = true;
       return;
     }
-    const place = placeAnchor(composer.getBoundingClientRect(), viewportOf(doc));
+    const place = placeAnchor(anchorRect(composer), viewportOf(doc));
     host.hidden = false;
     host.style.left = `${place.left}px`;
     host.style.top = `${place.top}px`;
@@ -342,6 +342,17 @@ function findComposer(doc, selectors) {
     }
   }
   return best;
+}
+
+function anchorRect(el) {
+  const rect = el.getBoundingClientRect();
+  const parent = el.parentElement;
+  if (!parent || rect.height >= 64) return rect;
+  const parentRect = parent.getBoundingClientRect();
+  const taller = parentRect.height > rect.height && parentRect.height <= 240;
+  const wider = parentRect.width >= rect.width - 8 && parentRect.width <= rect.width + 80;
+  if (taller && wider && parentRect.width > 200) return parentRect;
+  return rect;
 }
 
 function shown(el) {

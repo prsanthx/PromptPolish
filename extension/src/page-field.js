@@ -14,6 +14,8 @@ export const SITE_RULES = [
       '#prompt-textarea',
       'div#prompt-textarea',
       '[data-testid="prompt-textarea"]',
+      '#mobile-composer-prompt',
+      'textarea[name="prompt"]',
       'textarea[data-id="root"]',
     ],
   },

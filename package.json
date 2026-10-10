@@ -6,7 +6,8 @@
   "description": "Local Chrome extension that rewrites rough prompts without a server. On ChatGPT, a composer button can rewrite and insert in the page.",
   "scripts": {
     "test": "node --test",
-    "eval": "node eval/run-eval.js"
+    "eval": "node eval/run-eval.js",
+    "bundle": "npx --yes esbuild extension/src/composer-button.js --bundle --format=iife --outfile=extension/composer/content.js"
   },
   "license": "Apache-2.0",
   "engines": {
