@@ -1,0 +1,15 @@
+{
+  "name": "promptpolish",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Chrome extension that rewrites rough prompts without a server.",
+  "scripts": {
+    "test": "node --test",
+    "eval": "node eval/run-eval.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
