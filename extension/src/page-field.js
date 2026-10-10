@@ -10,7 +10,12 @@ export const SITE_RULES = [
     id: 'chatgpt',
     label: 'ChatGPT',
     hosts: ['chatgpt.com', 'chat.openai.com'],
-    selectors: ['#prompt-textarea', 'div#prompt-textarea', 'textarea[data-id="root"]'],
+    selectors: [
+      '#prompt-textarea',
+      'div#prompt-textarea',
+      '[data-testid="prompt-textarea"]',
+      'textarea[data-id="root"]',
+    ],
   },
   {
     id: 'claude',

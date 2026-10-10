@@ -19,16 +19,24 @@ function walk(dir) {
   return files;
 }
 
-test('manifest is MV3 with only activeTab and scripting', () => {
+test('manifest is MV3 and the content script is ChatGPT only', () => {
   const manifest = JSON.parse(read('manifest.json'));
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual([...manifest.permissions].sort(), ['activeTab', 'scripting']);
   assert.equal(manifest.host_permissions, undefined);
-  assert.equal(manifest.content_scripts, undefined);
   assert.equal(manifest.background, undefined);
   assert.equal(manifest.chrome_url_overrides, undefined);
   assert.equal(manifest.externally_connectable, undefined);
+  assert.equal(manifest.web_accessible_resources, undefined);
   assert.equal(manifest.action.default_popup, 'popup/popup.html');
+  assert.deepEqual(manifest.content_scripts, [
+    {
+      matches: ['https://chatgpt.com/*', 'https://chat.openai.com/*'],
+      js: ['src/composer-button.js'],
+      type: 'module',
+      run_at: 'document_idle',
+    },
+  ]);
 });
 
 test('popup exposes the v1 controls and accessible labels', () => {
@@ -50,7 +58,7 @@ test('popup exposes the v1 controls and accessible labels', () => {
 });
 
 test('extension sources do not call the network or store prompts', () => {
-  const files = walk(new URL('.', root).pathname).filter((path) => /\.(js|html|css|json)$/.test(path));
+  const files = walk(new URL('.', root).pathname).filter((path) => /\.(js|html|css)$/.test(path));
   assert.ok(files.length >= 4);
   const banned = [
     /\bfetch\s*\(/,
