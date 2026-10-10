@@ -222,7 +222,72 @@ export function readPromptField(rules) {
 }
 
 /**
- * Injected into the page. Replaces the field's text and checks that it stuck.
+ * Compare a field's text with what we tried to write.
+ * Textareas must match exactly. Contenteditable fields match after whitespace collapses.
+ * @param {string} actual
+ * @param {string} expected
+ * @param {'textarea'|'input'|'contenteditable'} kind
+ */
+export function fieldTextMatches(actual, expected, kind) {
+  if (kind === 'textarea' || kind === 'input') return String(actual ?? '') === String(expected ?? '');
+  const norm = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
+  return norm(actual) === norm(expected);
+}
+
+/**
+ * Write into an element the content script already holds.
+ * Does not press Enter and does not submit a form.
+ * @param {Element} el
+ * @param {string} text
+ */
+export function applyFieldText(el, text) {
+  if (!el) return { ok: false, reason: 'missing' };
+  el.focus();
+  const tag = el.tagName;
+
+  if (tag === 'TEXTAREA' || tag === 'INPUT') {
+    const proto = tag === 'TEXTAREA' ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype;
+    const descriptor = Object.getOwnPropertyDescriptor(proto, 'value');
+    if (descriptor?.set) descriptor.set.call(el, text);
+    else el.value = text;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+    const verified = fieldTextMatches(el.value || '', text, 'textarea');
+    if (verified) el.removeAttribute('data-promptpolish-target');
+    return verified ? { ok: true, verified: true } : { ok: false, reason: 'not-verified' };
+  }
+
+  if (el.isContentEditable || el.getAttribute('role') === 'textbox') {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    let inserted = false;
+    try {
+      inserted = document.execCommand('insertText', false, text);
+    } catch {
+      inserted = false;
+    }
+    if (!inserted) {
+      el.textContent = text;
+      el.dispatchEvent(new InputEvent('input', {
+        bubbles: true,
+        data: text,
+        inputType: 'insertText',
+      }));
+    }
+    const verified = fieldTextMatches(el.innerText || el.textContent || '', text, 'contenteditable');
+    if (verified) el.removeAttribute('data-promptpolish-target');
+    return verified ? { ok: true, verified: true } : { ok: false, reason: 'not-verified' };
+  }
+
+  return { ok: false, reason: 'unsupported' };
+}
+
+/**
+ * Injected into the page by the toolbar popup. Must stay self-contained:
+ * Chrome serializes this function alone, so it cannot call applyFieldText.
  * @param {string} selector
  * @param {string} text
  */

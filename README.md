@@ -28,6 +28,19 @@ No build step. Reload the extension from that page after you change a file.
 
 **Clear** wipes the draft in the popup. It does not change the page.
 
+## On ChatGPT
+
+On `chatgpt.com` and `chat.openai.com`, an icon sits on the composer while that field is on screen. You do not have to open the toolbar popup.
+
+1. Type in the composer.
+2. Click the icon. It opens into a chooser: Quick Fix, Detailed, or Expert.
+3. Pick a level. A short animation plays, then the panel shows the original, the improved prompt, and any assumption or open-question lines. You can edit the improved prompt.
+4. **Insert** replaces the composer text. That click is the confirmation. There is no second dialog, and PromptPolish does not send the message.
+5. **Dismiss** closes the panel and leaves the composer untouched.
+6. If ChatGPT drops the inserted text, the panel says so and **Copy** is still there.
+
+The same icon stays with the field if ChatGPT re-renders the page. It does not cover the send button. The toolbar popup still works here, and it is still how Claude, Gemini, and other sites are handled.
+
 ## Insert into the page
 
 1. Focus the prompt field, or open ChatGPT, Claude, or Gemini.
@@ -46,14 +59,14 @@ On any other site it does not scan the page for a random box. A focused field th
 
 ## Privacy and permissions
 
-The manifest asks for `activeTab` and `scripting` only.
+The manifest asks for `activeTab`, `scripting`, and host access to `chatgpt.com` and `chat.openai.com` only.
 
-- `activeTab` applies to the tab you are looking at, after you click the icon, and it does not last past that tab.
-- `scripting` is how the popup reads and writes that tab. There is no content script on every site, and no host permission.
+- That host permission and a content script are what let the composer icon stay on ChatGPT without a toolbar click. The script is not registered for any other site.
+- `activeTab` and `scripting` are how the toolbar popup reads and writes the tab you are looking at, including Claude, Gemini, and a focused field on any other page.
 - Prompts are not stored. The last level is not remembered. `storage` is not used.
 - There is no remote code, no API key, and no analytics endpoint.
 
-Browser pages such as `chrome://extensions` cannot be read. Paste the prompt instead.
+Browser pages such as `chrome://extensions` cannot be read by the popup. Paste the prompt instead.
 
 ## How enhancement works
 
@@ -86,8 +99,8 @@ How a check is decided, including the character budgets, is written in [docs/eva
 
 - An external model, including bring-your-own API key
 - Remembering the level you picked
-- An in-page review card
-- Composers other than ChatGPT, Claude, and Gemini
+- An in-page control on sites other than ChatGPT
+- Composers other than ChatGPT, Claude, and Gemini for the toolbar popup
 - Prompt history
 
 ## License

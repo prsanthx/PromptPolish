@@ -19,16 +19,27 @@ function walk(dir) {
   return files;
 }
 
-test('manifest is MV3 with only activeTab and scripting', () => {
+test('manifest is MV3 with popup permissions plus ChatGPT only', () => {
   const manifest = JSON.parse(read('manifest.json'));
+  const chatgpt = [
+    'https://chatgpt.com/*',
+    'https://chat.openai.com/*',
+  ];
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual([...manifest.permissions].sort(), ['activeTab', 'scripting']);
-  assert.equal(manifest.host_permissions, undefined);
-  assert.equal(manifest.content_scripts, undefined);
+  assert.deepEqual(manifest.host_permissions, chatgpt);
+  assert.equal(manifest.content_scripts.length, 1);
+  assert.deepEqual(manifest.content_scripts[0].matches, chatgpt);
+  assert.deepEqual(manifest.content_scripts[0].js, ['src/chatgpt-content.js']);
+  assert.equal(manifest.content_scripts[0].type, 'module');
+  assert.equal(manifest.content_scripts[0].all_frames, undefined);
   assert.equal(manifest.background, undefined);
   assert.equal(manifest.chrome_url_overrides, undefined);
   assert.equal(manifest.externally_connectable, undefined);
   assert.equal(manifest.action.default_popup, 'popup/popup.html');
+  assert.equal(JSON.stringify(manifest).includes('claude.ai'), false);
+  assert.equal(JSON.stringify(manifest).includes('gemini.google.com'), false);
+  assert.equal(manifest.permissions.includes('storage'), false);
 });
 
 test('popup exposes the v1 controls and accessible labels', () => {
@@ -62,8 +73,18 @@ test('extension sources do not call the network or store prompts', () => {
     /api[_-]?key/i,
     /google-analytics|gtag\s*\(/,
   ];
+  const allowedHosts = ['https://chatgpt.com/*', 'https://chat.openai.com/*'];
   for (const file of files) {
-    const source = readFileSync(file, 'utf8');
+    let source = readFileSync(file, 'utf8');
+    if (file.endsWith(`${join('extension', 'manifest.json')}`) || file.endsWith('manifest.json')) {
+      const manifest = JSON.parse(source);
+      const declared = [
+        ...(manifest.host_permissions ?? []),
+        ...(manifest.content_scripts ?? []).flatMap((entry) => entry.matches ?? []),
+      ];
+      for (const host of declared) assert.ok(allowedHosts.includes(host), host);
+      for (const host of allowedHosts) source = source.split(host).join('');
+    }
     for (const pattern of banned) {
       assert.doesNotMatch(source, pattern, `${file} matched ${pattern}`);
     }

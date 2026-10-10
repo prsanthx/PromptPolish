@@ -1,6 +1,6 @@
 {
   "name": "promptpolish",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "Local Chrome extension that rewrites rough prompts without a server.",
